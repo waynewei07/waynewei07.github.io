@@ -38,4 +38,16 @@ options="700x" >}}
 
 $$ \varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887… $$
 
+{{< expandable label="expandable 1" level="2" >}}
+Same inner text.
+{{< /expandable >}}
+
+{{< expandable label="expandable 2" level="2" >}}
+Same inner text.
+{{< /expandable >}}
+
+{{< expandable label="expandable 3" level="2" >}}
+Different inner text.
+{{< /expandable >}}
+
 
