@@ -17,7 +17,7 @@ imaging:
   quality: 99
 
 params:
-  description: 我是位煨，廢物競程選手
+  description: 我是瓜瓜，廢物競程選手
   homeMetaContent: An accessibility-friendly Hugo theme, ported from the original Cupper project.
   footer: Made with [Hugo](https://gohugo.io/). Themed by [Cupper](https://github.com/zwbetz-gh/cupper-hugo-theme). Deployed to [Netlify](https://www.netlify.com/).
   # For more date formats see https://gohugo.io/functions/format/
@@ -42,7 +42,7 @@ params:
 
 menu:
   nav:
-    - name: 首頁
+    - name: Home
       url: /
       weight: 1
     - name: Blog
