@@ -1,6 +1,7 @@
 ---
 title: "First post"
 date: 2022-09-23T08:47:19+08:00
+tags: [testing]
 toc: true
 ---
 
