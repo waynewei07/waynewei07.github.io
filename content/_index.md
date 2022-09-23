@@ -5,7 +5,9 @@ title: "Home"
 
 ## About Me
 ### 經歷
-$$ (this file is empty) $$
+<p align="center">
+this file is empty
+</p>
 ### 實力
 $$ -\infty $$
 ### 帳號
