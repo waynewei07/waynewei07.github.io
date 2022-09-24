@@ -5,7 +5,7 @@ title: "Home"
 
 ## About Me
 
-### 帳號
+### Accounts
 ID:guagua0407\
 [**Codeforces**](https://codeforces.com/profile/guagua0407)\
 [**Atcoder**](https://atcoder.jp/users/guagua0407)
