@@ -4,12 +4,7 @@ title: "Home"
 ---
 
 ## About Me
-### 經歷
-<p align="center">
-this file is empty
-</p>
-### 實力
-$$ -\infty $$
+
 ### 帳號
 ID:guagua0407\
 [**Codeforces**](https://codeforces.com/profile/guagua0407)\
