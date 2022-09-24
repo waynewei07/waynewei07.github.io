@@ -6,13 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <meta name="generator" content="Hugo 0.103.1" />
-  <link rel="canonical" href="https://waynewei07.github.io/first-post/" />
+  <link rel="canonical" href="https://waynewei07.github.io/baltic-oi-18-valley/" />
 
   
     
-    <meta name="description" content="cool stuff testing
-#include&lt;bits/stdc&#43;&#43;.h&gt; using namespace std; #define ll long long int main(){ int n; cin&gt;&gt;t; cout&lt;&lt;n; } 我超帥 — 魏巍 See the demo on codePen #111311 #CCABCC #FFFFFF $$ \varphi = \dfrac{1&#43;\sqrt5}{2}= 1.6180339887… $$
-expandable 1 Same inner text. expandable 2 Same inner text. expandable 3 Different inner text. ">
+    <meta name="description" content="題敘 有一棵大小為\(N\)的帶權樹，有\(S\)個點是商店，且點\(E\)為出口。給你\(Q\)個詢問，每個詢問有兩個數字\(I\)和\(R\)，問你刪除第\(I\)個邊後可否由\(R\)走到出口\(E\)，可以的話則輸出&#34;escaped&#34;，不行的話則輸出最近的商店離\(R\)的距離。
+想法 對於每一個詢問，可以分成「能不能到出口」和「最近商店」兩個部分。
+第一個部分我們先把邊\(I\)的比較低的節點叫做\(w\)。如果我們把\(E\)定為整棵樹的根節點，問題就變為\(w\)是不是\(R\)的祖先，因為如果是的話\(R\)到\(E\)的過程中一定會要經過邊\(I\)，這個問題可以\(O(n)\)預處理完後 \(O(1)\)判斷。
+第二個部分我們可以先知道\(R\)一定在\(W\)的子樹內。假設我們已經知道離\(R\)最近的商店為\(u\)，並且定義\(dis[v]\)為點\(E\)到點\(v\)的距離，則有答案為$$ dis[R]&#43;dis[u]-2dis[lca(R,u)] $$現在我們把\(lca(R,u)\)叫做\(k\)，則上式又可表示為$$ dis[R]-2dis[k]&#43;min_v(dis[v]) $$ 現在我們定義一個陣列\(magic[k]=-2dis[k]&#43;min_v (dis[v])\)，則對於所有在\(R\)到\(w\)的路徑的\(k\)，這個詢問的答案即為$$ dis[R]&#43;min_k(magic[k]) $$ 我們可以用一次dfs跑出\(magic\)，接著再用倍增法處理路徑上的最小值。
+Code: #include &lt;bits/stdc&#43;&#43;.h&gt; using namespace std; #define ll long long #define f first #define s second #define all(x) x.begin(),x.end() #define _ ios::sync_with_stdio(0); cin.tie(0); cout.tie(0); void setIO(string s) { freopen((s &#43; &#34;.in&#34;).c_str(), &#34;r&#34;, stdin); freopen((s &#43; &#34;.out&#34;).c_str(), &#34;w&#34;, stdout); } const int mxn=1e5&#43;5; vector&lt;pair&lt;int,int&gt;&gt; adj[mxn]; pair&lt;int,int&gt; edgeid[mxn]; bool isshop[mxn]={false}; ll depth[mxn]={0},length[mxn]={0}; ll magic[mxn]={(ll)1e18}; ll jumping[20][mxn],jumpingans[20][mxn]; int st[mxn],en[mxn]; int parent[mxn]; int timer=0; ll query(int top,int node){ int x=node; int pathlength=depth[node]-depth[top]; ll ans=magic[node]; for(int i=0;i&lt;20;i&#43;&#43;){ if(pathlength &amp; (1&lt;&lt;i)){ ans=min(ans,jumpingans[i][node]); node=jumping[i][node]; } } return ans&#43;length[x]; } void dfs(int v,int p){ st[v]=timer; timer&#43;&#43;; parent[v]=p; for(auto u:adj[v]){ if(u.">
   
 
   <link rel="apple-touch-icon" sizes="180x180" href="https://waynewei07.github.io/apple-touch-icon.png">
@@ -64,7 +66,7 @@ expandable 1 Same inner text. expandable 2 Same inner text. expandable 3 Differe
 
   
   
-  <title>First post | guagua0407&#39;s blog</title>
+  <title>Baltic OI 18   Valley | guagua0407&#39;s blog</title>
 </head>
 
   <body>
@@ -277,17 +279,14 @@ expandable 1 Same inner text. expandable 2 Same inner text. expandable 3 Differe
       <svg class="bookmark-icon" aria-hidden="true" viewBox="0 0 40 50" focusable="false">
         <use href="#bookmark"></use>
       </svg>
-      First post
+      Baltic OI 18   Valley
     </h1>
 
     <div class="date">
       
       
-      <strong>Publish date: </strong>Sep 23, 2022
+      <strong>Publish date: </strong>Sep 24, 2022
       
-        
-          <br>
-          <strong>Last updated: </strong>Sep 23, 2022
         
       
     </div>
@@ -302,7 +301,7 @@ expandable 1 Same inner text. expandable 2 Same inner text. expandable 3 Differe
                 <use href="#tag"></use>
               </svg>
               
-              <a href="/tags/testing/">testing</a>
+              <a href="/tags/baltic-oi/">Baltic OI</a>
             </li>
           
         </ul>
@@ -310,166 +309,130 @@ expandable 1 Same inner text. expandable 2 Same inner text. expandable 3 Differe
     
 
     
-  <nav class="toc" aria-labelledby="toc-heading">
-    <strong id="toc-heading">Table of Contents</strong>
-    <nav id="TableOfContents"></nav>
-  </nav>
 
 
-
-    <p>cool stuff testing</p>
-<body class="line-numbers"> <!-- enabled for the whole page -->
+    <body class="line-numbers"> <!-- enabled for the whole page -->
 </body>
-<pre><code class="language-cpp">#include&lt;bits/stdc++.h&gt;
+<h2 id="題敘">題敘</h2>
+<p>有一棵大小為\(N\)的帶權樹，有\(S\)個點是商店，且點\(E\)為出口。給你\(Q\)個詢問，每個詢問有兩個數字\(I\)和\(R\)，問你刪除第\(I\)個邊後可否由\(R\)走到出口\(E\)，可以的話則輸出&quot;escaped&quot;，不行的話則輸出最近的商店離\(R\)的距離。</p>
+<h2 id="想法">想法</h2>
+<p>對於每一個詢問，可以分成「能不能到出口」和「最近商店」兩個部分。<br>
+<br>
+第一個部分我們先把邊\(I\)的比較低的節點叫做\(w\)。如果我們把\(E\)定為整棵樹的根節點，問題就變為\(w\)是不是\(R\)的祖先，因為如果是的話\(R\)到\(E\)的過程中一定會要經過邊\(I\)，這個問題可以\(O(n)\)預處理完後
+\(O(1)\)判斷。<br>
+<br>
+第二個部分我們可以先知道\(R\)一定在\(W\)的子樹內。假設我們已經知道離\(R\)最近的商店為\(u\)，並且定義\(dis[v]\)為點\(E\)到點\(v\)的距離，則有答案為$$ dis[R]+dis[u]-2dis[lca(R,u)] $$現在我們把\(lca(R,u)\)叫做\(k\)，則上式又可表示為$$ dis[R]-2dis[k]+min_v(dis[v]) $$
+現在我們定義一個陣列\(magic[k]=-2dis[k]+min_v (dis[v])\)，則對於所有在\(R\)到\(w\)的路徑的\(k\)，這個詢問的答案即為$$ dis[R]+min_k(magic[k]) $$
+我們可以用一次dfs跑出\(magic\)，接著再用倍增法處理路徑上的最小值。</p>
+<h2 id="code">Code:</h2>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
 using namespace std;
-#define ll long long 
+#define ll long long
+#define f first
+#define s second
+#define all(x) x.begin(),x.end()
+#define _ ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
-int main(){
-    int n;
-    cin&gt;&gt;t;
-    cout&lt;&lt;n;
+void setIO(string s) {
+   freopen((s + &quot;.in&quot;).c_str(), &quot;r&quot;, stdin);
+   freopen((s + &quot;.out&quot;).c_str(), &quot;w&quot;, stdout);
+}
+
+const int mxn=1e5+5;
+vector&lt;pair&lt;int,int&gt;&gt; adj[mxn];
+pair&lt;int,int&gt; edgeid[mxn];
+bool isshop[mxn]={false};
+ll depth[mxn]={0},length[mxn]={0};
+ll magic[mxn]={(ll)1e18};
+ll jumping[20][mxn],jumpingans[20][mxn];
+int st[mxn],en[mxn];
+int parent[mxn];
+int timer=0;
+
+ll query(int top,int node){
+   int x=node;
+   int pathlength=depth[node]-depth[top];
+   ll ans=magic[node];
+   for(int i=0;i&lt;20;i++){
+       if(pathlength &amp; (1&lt;&lt;i)){
+           ans=min(ans,jumpingans[i][node]);
+           node=jumping[i][node];
+       }
+   }
+   return ans+length[x];
+}
+
+void dfs(int v,int p){
+   st[v]=timer;
+   timer++;
+   parent[v]=p;
+   for(auto u:adj[v]){
+       if(u.f==p) continue;
+       depth[u.f]=depth[v]+1;
+       //cout&lt;&lt;v&lt;&lt;' '&lt;&lt;u.f&lt;&lt;' '&lt;&lt;u.s&lt;&lt;'\n';
+       length[u.f]=length[v]+u.s;
+       dfs(u.f,v);
+   }
+   en[v]=timer;
+   timer++;
+}
+
+void dfs2(int v,int p){
+   if(isshop[v]) magic[v]=length[v];
+   else magic[v]=(ll)1e18;
+   for(auto u:adj[v]){
+       if(u.f==p) continue;
+       dfs2(u.f,v);
+       magic[v]=min(magic[v],magic[u.f]);
+   }
+}
+
+int main() {_
+   //setIO(&quot;wayne&quot;);
+   int n,s,q,e;
+   cin&gt;&gt;n&gt;&gt;s&gt;&gt;q&gt;&gt;e;
+   for(int i=1;i&lt;=n-1;i++){
+       int a,b,w;
+       cin&gt;&gt;a&gt;&gt;b&gt;&gt;w;
+       adj[a].push_back({b,w});
+       adj[b].push_back({a,w});
+       edgeid[i]={a,b};
+   }
+   for(int i=0;i&lt;s;i++){
+       int x;
+       cin&gt;&gt;x;
+       isshop[x]=true;
+   }
+   dfs(e,0);
+   dfs2(e,0);
+   for(int i=1;i&lt;=n;i++){
+       magic[i]-=2*length[i];
+   }
+   for(int i=1;i&lt;=n;i++){
+       jumping[0][i]=parent[i];
+       jumpingans[0][i]=magic[parent[i]];
+   }
+   for(int i=1;i&lt;20;i++){
+       for(int j=1;j&lt;=n;j++){
+           jumping[i][j]=jumping[i-1][jumping[i-1][j]];
+           jumpingans[i][j]=min(jumpingans[i-1][j],jumpingans[i-1][jumping[i-1][j]]);
+       }
+   }
+   for(int i=0;i&lt;q;i++){
+       int edge,node;
+       cin&gt;&gt;edge&gt;&gt;node;
+       int top=(depth[edgeid[edge].f]&gt;depth[edgeid[edge].s]?edgeid[edge].f:edgeid[edge].s);
+       if(st[top]&lt;=st[node] and en[node]&lt;=en[top]){
+           if(query(top,node)&lt;=(ll)1e14) cout&lt;&lt;query(top,node)&lt;&lt;'\n';
+           else cout&lt;&lt;&quot;oo&quot;&lt;&lt;'\n';
+       }
+       else{
+           cout&lt;&lt;&quot;escaped&quot;&lt;&lt;'\n';
+       }
+   }
+   return 0;
 }
 </code></pre>
-
-
-<blockquote class="blockquote">
-  <p>
-    我超帥
-    
-      <br>
-      <span class="author">&mdash; 魏巍</span>
-    
-  </p>
-</blockquote>
-
-
-  <iframe height="300" scrolling="no" title="code demonstration with codePen" src="//codepen.io/someuser/embed/VpVNKW/?height=265&theme-id=dark&default-tab=result,result&embed-version=2" frameborder="no" allowtransparency="true" allowfullscreen="true" style="width: 100%;">
-    <div>
-      <a href="//codepen.io/someuser/pen/VpVNKW">See the demo on codePen</a>
-    </div>
-  </iframe>
-
-
-
-
-<div class="colors-container">
-  <ul class="colors">
-    
-      <li style="background-color: #111311;">
-        <span>#111311</span>
-      </li>
-    
-      <li style="background-color: #CCABCC;">
-        <span>#CCABCC</span>
-      </li>
-    
-      <li style="background-color: #FFFFFF; border: 1px solid #111">
-        <span>#FFFFFF</span>
-      </li>
-    
-  </ul>
-</div>
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<figure role="group" aria-describedby="caption-d41d8cd98f00b204e9800998ecf8427e">
-  <a href="/first-post/rick.jpeg" class="img-link">
-    <img src="/first-post/rick_hu34262c781bfbcee0c4fecd8f8f202065_8146_700x0_resize_q99_box.jpeg">
-  </a>
-  <figcaption id="caption-d41d8cd98f00b204e9800998ecf8427e">
-    
-  </figcaption>
-</figure>
-
-<p>$$ \varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887… $$</p>
-<div class="expandable-section">
-  
-    <h2>
-  
-    
-    
-    
-    
-    
-    <button aria-expanded="false" data-expands="js-expandable-4c1c5d415b8e590c172aefbecbfd4ddd">
-      <span class="expandable-label">expandable 1</span>
-      <svg aria-hidden="true" focusable="false" viewBox="0 0 70.866142 70.866141">
-        <g transform="translate(0 -981.5)">
-          <rect style="stroke-width:0;fill:currentColor" ry="5" height="60" width="9.8985" y="987.36" x="30.051" class="up-strut" />
-          <rect style="stroke-width:0;fill:currentColor" ry="5" height="10" width="60" y="1012.4" x="5"/>
-        </g>
-      </svg>
-    </button>
-  
-    </h2>
-  
-  <div id="js-expandable-4c1c5d415b8e590c172aefbecbfd4ddd" hidden>
-    Same inner text.
-  </div>
-</div>
-
-<div class="expandable-section">
-  
-    <h2>
-  
-    
-    
-    
-    
-    
-    <button aria-expanded="false" data-expands="js-expandable-d2bd14bc41754cd9bde1f0ef8acce5d5">
-      <span class="expandable-label">expandable 2</span>
-      <svg aria-hidden="true" focusable="false" viewBox="0 0 70.866142 70.866141">
-        <g transform="translate(0 -981.5)">
-          <rect style="stroke-width:0;fill:currentColor" ry="5" height="60" width="9.8985" y="987.36" x="30.051" class="up-strut" />
-          <rect style="stroke-width:0;fill:currentColor" ry="5" height="10" width="60" y="1012.4" x="5"/>
-        </g>
-      </svg>
-    </button>
-  
-    </h2>
-  
-  <div id="js-expandable-d2bd14bc41754cd9bde1f0ef8acce5d5" hidden>
-    Same inner text.
-  </div>
-</div>
-
-<div class="expandable-section">
-  
-    <h2>
-  
-    
-    
-    
-    
-    
-    <button aria-expanded="false" data-expands="js-expandable-3f442146ec5169f0a14d43a0c27d48e9">
-      <span class="expandable-label">expandable 3</span>
-      <svg aria-hidden="true" focusable="false" viewBox="0 0 70.866142 70.866141">
-        <g transform="translate(0 -981.5)">
-          <rect style="stroke-width:0;fill:currentColor" ry="5" height="60" width="9.8985" y="987.36" x="30.051" class="up-strut" />
-          <rect style="stroke-width:0;fill:currentColor" ry="5" height="10" width="60" y="1012.4" x="5"/>
-        </g>
-      </svg>
-    </button>
-  
-    </h2>
-  
-  <div id="js-expandable-3f442146ec5169f0a14d43a0c27d48e9" hidden>
-    Different inner text.
-  </div>
-</div>
-
 
   </main>
   <div id="disqus-container">
